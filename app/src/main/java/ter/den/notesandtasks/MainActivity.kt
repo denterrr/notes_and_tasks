@@ -4,28 +4,29 @@ import android.app.*
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
-import androidx.work.*
-import java.time.Duration
-import java.util.Calendar
-import java.util.concurrent.TimeUnit
+import androidx.appcompat.app.AppCompatActivity
+import ter.den.notesandtasks.databinding.ActivityMainBinding
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var count = 0
+
+    private var _binding: ActivityMainBinding? = null
+    private val binding
+        get() = _binding ?: throw RuntimeException()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
         val notificationManager = getSystemService(NotificationManager::class.java)
-        val notificationChannel = NotificationChannel("CHANNEL_ID", "description", NotificationManager.IMPORTANCE_DEFAULT)
+        val notificationChannel =
+            NotificationChannel("CHANNEL_ID", "description", NotificationManager.IMPORTANCE_DEFAULT)
         notificationChannel.enableLights(true)
         notificationChannel.lightColor = Color.GREEN
         notificationManager.createNotificationChannel(notificationChannel)
-
 
 
 //        val workk = OneTimeWorkRequestBuilder<MyService>()
