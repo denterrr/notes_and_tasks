@@ -1,24 +1,32 @@
 package ter.den.notesandtasks
 
-import android.app.*
-import android.content.Intent
-import android.graphics.BitmapFactory
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import ter.den.notesandtasks.databinding.ActivityMainBinding
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    var count = 0
 
     private var _binding: ActivityMainBinding? = null
     private val binding
         get() = _binding ?: throw RuntimeException()
 
+    private val navController: NavController by lazy {
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navFragmentContainer) as NavHostFragment
+        navHostFragment.navController
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
         val notificationManager = getSystemService(NotificationManager::class.java)
@@ -50,27 +58,21 @@ class MainActivity : AppCompatActivity() {
 //            intent, PendingIntent.FLAG_IMMUTABLE)
 //        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 59000, pIntent)
 
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.SECOND, 15)
-        val intent = Intent(this, MyReceiver::class.java)
-        intent.putExtra("id", 3)
-        val pIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-        val manager = getSystemService(AlarmManager::class.java)
-        manager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,pIntent )
+//        val calendar = Calendar.getInstance()
+//        calendar.add(Calendar.SECOND, 15)
+//        val intent = Intent(this, MyReceiver::class.java)
+//        intent.putExtra("id", 3)
+//        val pIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+//        val manager = getSystemService(AlarmManager::class.java)
+//        manager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,pIntent )
     }
 
-    fun createNotif(){
-        val intent = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-        val notificationManager = getSystemService(NotificationManager::class.java)
-
-        val builder = Notification.Builder(this, "CHANNEL_ID")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_foreground))
-            .setContentTitle("IS TITLE")
-            .setContentText(count.toString())
-            .setContentIntent(pendingIntent)
-        notificationManager.notify(count, builder.build())
-        count++
+    override fun onStart() {
+        super.onStart()
+        val navhost =
+            supportFragmentManager.findFragmentById(R.id.navFragmentContainer) as NavHostFragment
+        binding.bottomNavigation.setupWithNavController(navhost.navController)
     }
+
+
 }

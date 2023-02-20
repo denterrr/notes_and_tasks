@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/notes_tab_navigation"
+        android:enabled="true"
+        android:icon="@drawable/ic_note"
+        android:title="@string/notes" />
+
+    <item
+        android:id="@+id/tasks_tab_navigation"
+        android:icon="@drawable/ic_task"
+        android:title="@string/tasks" />
+
+</menu>

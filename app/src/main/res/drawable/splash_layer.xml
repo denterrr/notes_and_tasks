@@ -3,6 +3,6 @@
 
     <item android:drawable="?attr/appPrimaryColor" />
     <item
-        android:drawable="@drawable/ic_note"
+        android:drawable="@drawable/ic_note_main"
         android:gravity="center" />
 </layer-list>

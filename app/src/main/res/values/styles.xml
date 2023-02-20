@@ -1,2 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <!--    TEXT START-->
+
+    <style name="Caption">
+        <item name="fontFamily">@font/manrope_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?attr/appSecondaryColor</item>
+    </style>
+
+
+    <!--    TEXT END-->
+
+    <style name="Divider">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:alpha">0.4</item>
+        <item name="android:background">?attr/appSecondaryColor</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+        <item name="itemTextAppearanceActive">@style/Caption</item>
+        <item name="itemTextAppearanceInactive">@style/Caption</item>
+        <item name="backgroundTint">?attr/appPrimaryColor</item>
+        <item name="itemActiveIndicatorStyle">@style/App.Custom.Indicator</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/blue</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorOnSecondaryContainer">@color/white</item>
+    </style>
+</resources>
