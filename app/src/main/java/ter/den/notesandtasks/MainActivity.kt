@@ -5,7 +5,6 @@ import android.app.NotificationManager
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ter.den.notesandtasks.databinding.ActivityMainBinding
@@ -16,17 +15,12 @@ class MainActivity : AppCompatActivity() {
     private val binding
         get() = _binding ?: throw RuntimeException()
 
-    private val navController: NavController by lazy {
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.navFragmentContainer) as NavHostFragment
-        navHostFragment.navController
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUpNavigation()
 
 
         val notificationManager = getSystemService(NotificationManager::class.java)
@@ -67,11 +61,10 @@ class MainActivity : AppCompatActivity() {
 //        manager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis,pIntent )
     }
 
-    override fun onStart() {
-        super.onStart()
-        val navhost =
+    private fun setUpNavigation() {
+        val navHost =
             supportFragmentManager.findFragmentById(R.id.navFragmentContainer) as NavHostFragment
-        binding.bottomNavigation.setupWithNavController(navhost.navController)
+        binding.bottomNavigation.setupWithNavController(navHost.navController)
     }
 
 

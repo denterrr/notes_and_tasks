@@ -17,6 +17,8 @@
 
         <item name="appPrimaryColor">@color/darkPrimary</item>
         <item name="appSecondaryColor">@color/white</item>
+        <item name="appBackgroundColor">@color/darkPrimary</item>
+        <item name="appSecondaryBackgroundColor">@color/darkSecondary</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.Material3.DayNight.NoActionBar">

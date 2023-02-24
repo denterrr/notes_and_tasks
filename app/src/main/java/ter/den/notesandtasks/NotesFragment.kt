@@ -14,6 +14,10 @@ class NotesFragment : Fragment() {
     private val binding
         get() = _binding ?: throw CustomThrowable.BindingNull
 
+    private val notesAdapter by lazy {
+        NoteAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -21,6 +25,8 @@ class NotesFragment : Fragment() {
 
         _binding = FragmentNotesBinding.inflate(layoutInflater)
         binding.tvNotesCount.text = "32 notes"
+        binding.rvNotes.adapter = notesAdapter
+
         return binding.root
     }
 

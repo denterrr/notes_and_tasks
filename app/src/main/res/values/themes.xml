@@ -13,17 +13,19 @@
 
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/grey</item>
+        <item name="android:navigationBarColor">@color/grey</item>
 
         <!-- Customize your theme here. -->
 
         <item name="appPrimaryColor">@color/white</item>
         <item name="appSecondaryColor">@color/darkPrimary</item>
+        <item name="appBackgroundColor">@color/grey</item>
+        <item name="appSecondaryBackgroundColor">@color/white</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_layer</item>
-        <item name="appPrimaryColor">@color/darkSecondary</item>
+        <item name="appPrimaryColor">@color/grey</item>
     </style>
 </resources>
