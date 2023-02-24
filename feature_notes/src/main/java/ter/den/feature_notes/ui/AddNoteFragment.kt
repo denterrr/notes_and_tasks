@@ -1,4 +1,4 @@
-package ter.den.notesandtasks
+package ter.den.feature_notes.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ter.den.core.domain.model.CustomThrowable
-import ter.den.notesandtasks.databinding.FragmentTasksBinding
+import ter.den.feature_notes.databinding.FragmentAddNoteBinding
 
-class TasksFragment : Fragment() {
-    private var _binding: FragmentTasksBinding? = null
+class AddNoteFragment : Fragment() {
+
+    private var _binding: FragmentAddNoteBinding? = null
     private val binding
         get() = _binding ?: throw CustomThrowable.BindingNull
 
@@ -18,7 +19,7 @@ class TasksFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
 
-        _binding = FragmentTasksBinding.inflate(layoutInflater)
+        _binding = FragmentAddNoteBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -35,4 +36,5 @@ class TasksFragment : Fragment() {
         _binding = null
         super.onDestroyView()
     }
+
 }

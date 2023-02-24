@@ -1,4 +1,4 @@
-package ter.den.notesandtasks.domain.model
+package ter.den.core.domain.model
 
 sealed class CustomThrowable : Throwable() {
 

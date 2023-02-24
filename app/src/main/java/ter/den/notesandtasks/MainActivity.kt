@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ter.den.notesandtasks.databinding.ActivityMainBinding
@@ -65,6 +66,11 @@ class MainActivity : AppCompatActivity() {
         val navHost =
             supportFragmentManager.findFragmentById(R.id.navFragmentContainer) as NavHostFragment
         binding.bottomNavigation.setupWithNavController(navHost.navController)
+        navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.bottomNavigation.isVisible =
+                destination.id !in listOf(ter.den.feature_notes.R.id.addNoteFragment)
+            binding.divider.isVisible = binding.bottomNavigation.isVisible
+        }
     }
 
 

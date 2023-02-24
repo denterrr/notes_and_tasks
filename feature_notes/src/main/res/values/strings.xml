@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="note_description">%s | %s</string>
+    <string name="my_notes">My notes</string>
+    <string name="add_your_first_note_right_now">Add your first note right now!</string>
+    <string name="done">Done</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+</resources>

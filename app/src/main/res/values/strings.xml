@@ -3,7 +3,4 @@
     <string name="notes">Notes</string>
     <string name="tasks">Tasks</string>
     <string name="search">Search</string>
-    <string name="note_description">%s | %s</string>
-    <string name="my_notes">My notes</string>
-    <string name="add_your_first_note_right_now">Add your first note right now!</string>
 </resources>

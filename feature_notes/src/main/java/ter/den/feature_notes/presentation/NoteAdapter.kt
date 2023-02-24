@@ -1,10 +1,12 @@
-package ter.den.notesandtasks
+package ter.den.feature_notes.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ter.den.notesandtasks.databinding.ItemNoteBinding
-import ter.den.notesandtasks.domain.model.Note
+import ter.den.feature_notes.R
+import ter.den.feature_notes.databinding.ItemNoteBinding
+import ter.den.feature_notes.domain.model.Note
+
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     val list = listOf(

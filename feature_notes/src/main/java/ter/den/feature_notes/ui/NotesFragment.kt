@@ -1,12 +1,16 @@
-package ter.den.notesandtasks
+package ter.den.feature_notes.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ter.den.notesandtasks.databinding.FragmentNotesBinding
-import ter.den.notesandtasks.domain.model.CustomThrowable
+import androidx.navigation.fragment.findNavController
+import ter.den.core.domain.model.CustomThrowable
+import ter.den.feature_notes.R
+import ter.den.feature_notes.databinding.FragmentNotesBinding
+import ter.den.feature_notes.presentation.NoteAdapter
+
 
 class NotesFragment : Fragment() {
 
@@ -36,7 +40,9 @@ class NotesFragment : Fragment() {
     }
 
     private fun initClickListeners() {
-
+        binding.fab.setOnClickListener {
+            findNavController().navigate(R.id.action_notesFragment_to_addNoteFragment)
+        }
     }
 
     override fun onDestroyView() {

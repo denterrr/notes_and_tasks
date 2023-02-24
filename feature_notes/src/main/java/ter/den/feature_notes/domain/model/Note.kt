@@ -1,4 +1,4 @@
-package ter.den.notesandtasks.domain.model
+package ter.den.feature_notes.domain.model
 
 data class Note(
     val title: String,
