@@ -19,6 +19,10 @@
         <item name="appSecondaryColor">@color/white</item>
         <item name="appBackgroundColor">@color/darkPrimary</item>
         <item name="appSecondaryBackgroundColor">@color/darkSecondary</item>
+
+
+        <!--        REMOVING UNDERLINE IN TEXT INPUT EDIT TEXT-->
+        <item name="android:candidatesTextStyleSpans">candidates</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.Material3.DayNight.NoActionBar">

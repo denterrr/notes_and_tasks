@@ -17,7 +17,7 @@
             style="@style/Widget.App.CollapsingToolbar.Large"
             android:layout_width="match_parent"
             app:expandedTitleMarginTop="16dp"
-            app:title="@string/my_notes">
+            app:title="My tasks">
 
             <ImageView
                 android:id="@+id/ivNotesMain"
@@ -49,17 +49,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvNotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:paddingBottom="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_note" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -79,8 +68,7 @@
         android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
         android:gravity="center"
-        android:text="@string/add_your_first_note_right_now"
-        android:visibility="invisible" />
+        android:text="@string/add_your_first_task_right_now" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

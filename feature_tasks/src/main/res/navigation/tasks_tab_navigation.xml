@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/tasksFragment"
-        android:name="ter.den.notesandtasks.TasksFragment"
+        android:name="ter.den.feature_tasks.ui.TasksFragment"
         android:label="TasksFragment" />
 </navigation>

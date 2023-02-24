@@ -24,11 +24,12 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
         android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@id/appBar"
+        android:scrollbars="vertical"
+        android:fillViewport="true"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constrainedHeight="true">
+        app:layout_constraintTop_toBottomOf="@id/appBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,17 +39,17 @@
                 android:id="@+id/tilTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxBackgroundMode="none"
                 app:hintEnabled="false"
+                app:boxBackgroundMode="none"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/title"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:hint="@string/title"
                     android:textAppearance="@style/Text.Title1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -56,16 +57,22 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilDesc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="12dp"
                 app:boxBackgroundMode="none"
+                app:layout_constrainedHeight="true"
                 app:hintEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilTitle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDesc"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:backgroundTint="@android:color/transparent"
+                    android:background="@android:color/transparent"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:layout_height="match_parent"
                     android:hint="@string/description"
                     android:textAppearance="@style/Text.Body" />
 

@@ -18,8 +18,8 @@ class AddNoteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-
         _binding = FragmentAddNoteBinding.inflate(layoutInflater)
+        parseParams()
         return binding.root
     }
 
@@ -28,8 +28,14 @@ class AddNoteFragment : Fragment() {
         initClickListeners()
     }
 
-    private fun initClickListeners() {
+    private fun parseParams() {
+        val noteId = requireArguments().getLong(NOTE_ID_KEY, -1)
+    }
 
+    private fun initClickListeners() {
+        binding.toolBar.setNavigationOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     override fun onDestroyView() {
@@ -37,4 +43,8 @@ class AddNoteFragment : Fragment() {
         super.onDestroyView()
     }
 
+
+    companion object {
+        const val NOTE_ID_KEY = "NOTE_ID_KEY"
+    }
 }

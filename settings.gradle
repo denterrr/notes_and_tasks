@@ -16,3 +16,4 @@ rootProject.name = "Notes and tasks"
 include ':app'
 include ':feature_notes'
 include ':core'
+include ':feature_tasks'

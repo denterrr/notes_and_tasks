@@ -39,6 +39,7 @@ android {
 dependencies {
 
     implementation project(':feature_notes')
+    implementation project(':feature_tasks')
     implementation project(':core')
 
     implementation 'androidx.core:core-ktx:1.9.0'

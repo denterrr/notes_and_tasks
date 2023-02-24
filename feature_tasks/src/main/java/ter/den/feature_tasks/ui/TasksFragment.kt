@@ -1,4 +1,4 @@
-package ter.den.notesandtasks
+package ter.den.feature_tasks.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ter.den.core.domain.model.CustomThrowable
-import ter.den.notesandtasks.databinding.FragmentTasksBinding
+import ter.den.feature_tasks.R
+import ter.den.feature_tasks.databinding.FragmentTasksBinding
 
 class TasksFragment : Fragment() {
     private var _binding: FragmentTasksBinding? = null
@@ -19,6 +20,7 @@ class TasksFragment : Fragment() {
     ): View {
 
         _binding = FragmentTasksBinding.inflate(layoutInflater)
+        binding.tvNotesCount.text = getString(R.string.tasks_count).format(5)
         return binding.root
     }
 
