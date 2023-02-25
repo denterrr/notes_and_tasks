@@ -5,10 +5,8 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.util.Log
-import android.widget.Toast
 import androidx.work.*
+import ter.den.notesandtasks.ui.MainActivity
 import java.util.concurrent.TimeUnit
 
 

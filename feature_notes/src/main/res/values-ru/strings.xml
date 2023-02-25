@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="note_description">%s | %s</string>
+    <string name="note_description_only_time">%s</string>
+    <string name="my_notes">Мои заметки</string>
+    <string name="add_your_first_note_right_now">Добавьте свою первую заметку прямо сейчас!</string>
+    <string name="done">Готово</string>
+    <string name="description">Описание</string>
+    <string name="title">Название</string>
+    <string name="notes_count">%s заметки</string>
+    <string name="right_now">Только что</string>
+    <string name="minutes_ago">%s минут(ы) назад</string>
+    <string name="one_minute_ago">1 минуту назад</string>
+    <string name="hours_ago">%s часа(ов) назад</string>
+    <string name="one_hour_ago">1 час назад</string>
+    <string name="yesterday">Вчера</string>
+    <string name="untitled">Без название</string>
+</resources>

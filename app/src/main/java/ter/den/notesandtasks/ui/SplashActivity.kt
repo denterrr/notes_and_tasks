@@ -1,4 +1,4 @@
-package ter.den.notesandtasks
+package ter.den.notesandtasks.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent

@@ -1,4 +1,4 @@
-package ter.den.notesandtasks
+package ter.den.notesandtasks.ui
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.AppBarLayout
+import ter.den.notesandtasks.R
 import ter.den.notesandtasks.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,13 +26,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpNavigation()
 
-
-        val notificationManager = getSystemService(NotificationManager::class.java)
-        val notificationChannel =
-            NotificationChannel("CHANNEL_ID", "description", NotificationManager.IMPORTANCE_DEFAULT)
-        notificationChannel.enableLights(true)
-        notificationChannel.lightColor = Color.GREEN
-        notificationManager.createNotificationChannel(notificationChannel)
 
 
 //        val workk = OneTimeWorkRequestBuilder<MyService>()
@@ -71,7 +67,44 @@ class MainActivity : AppCompatActivity() {
                 destination.id !in listOf(ter.den.feature_notes.R.id.addNoteFragment)
             binding.divider.isVisible = binding.bottomNavigation.isVisible
         }
+
+        binding.bottomNavigation.setOnItemReselectedListener { menuItem ->
+            val recyclerView =
+                if (menuItem.itemId == R.id.notes_tab_navigation) navHost.requireView()
+                    .findViewById<RecyclerView>(
+                        ter.den.feature_notes.R.id.rvNotes
+                    ) else navHost.requireView().findViewById<RecyclerView>(
+                    ter.den.feature_notes.R.id.rvNotes
+                )
+            val toolBar =
+                if (menuItem.itemId == R.id.notes_tab_navigation) navHost.requireView()
+                    .findViewById<AppBarLayout>(
+                        ter.den.feature_notes.R.id.appBar
+                    ) else navHost.requireView().findViewById(
+                    ter.den.feature_notes.R.id.appBar
+                )
+            recyclerView.smoothScrollToPosition(0)
+            toolBar.setExpanded(true, true)
+
+        }
+
+        fun initNotificationChannel() {
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            val notificationChannel =
+                NotificationChannel(
+                    CHANNEL_ID,
+                    CHANNEL_NAME,
+                    NotificationManager.IMPORTANCE_DEFAULT
+                )
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.GREEN
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
     }
 
+    companion object {
+        const val CHANNEL_ID = "CHANNEL ID TER"
+        const val CHANNEL_NAME = "DEN TER CHANNEL"
+    }
 
 }

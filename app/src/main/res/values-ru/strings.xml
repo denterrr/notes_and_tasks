@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Заметки и задачи</string>
+    <string name="notes">Заметки</string>
+    <string name="tasks">Задачи</string>
+    <string name="search">Поиск</string>
+</resources>

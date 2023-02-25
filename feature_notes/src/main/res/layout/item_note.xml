@@ -7,6 +7,8 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="12dp"
     android:clickable="true"
+    android:checkable="true"
+    app:checkedIcon="@drawable/ic_done"
     android:focusable="true"
     app:cardBackgroundColor="?attr/appSecondaryBackgroundColor"
     app:cardElevation="4dp"
@@ -41,7 +43,7 @@
             android:maxLines="1"
             app:layout_constraintStart_toStartOf="@id/tvTitle"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            tools:text="August 8" />
+            tools:text="August 8eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

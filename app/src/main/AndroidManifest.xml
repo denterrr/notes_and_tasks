@@ -18,7 +18,7 @@
         <receiver android:name=".MyReceiver" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <meta-data
@@ -31,9 +31,8 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            android:name=".ui.MainActivity"
+            android:exported="false">
 
             <meta-data
                 android:name="android.app.lib_name"

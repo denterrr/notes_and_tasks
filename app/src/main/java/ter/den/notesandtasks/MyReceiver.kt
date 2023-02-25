@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import ter.den.notesandtasks.ui.MainActivity
 
 class MyReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
