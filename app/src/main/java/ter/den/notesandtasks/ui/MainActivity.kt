@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 if (menuItem.itemId == R.id.notes_tab_navigation) navHost.requireView()
                     .findViewById<RecyclerView>(
                         ter.den.feature_notes.R.id.rvNotes
-                    ) else navHost.requireView().findViewById<RecyclerView>(
+                    ) else navHost.requireView().findViewById(
                     ter.den.feature_notes.R.id.rvNotes
                 )
             val toolBar =
@@ -85,21 +85,21 @@ class MainActivity : AppCompatActivity() {
                 )
             recyclerView.smoothScrollToPosition(0)
             toolBar.setExpanded(true, true)
-
         }
 
-        fun initNotificationChannel() {
-            val notificationManager = getSystemService(NotificationManager::class.java)
-            val notificationChannel =
-                NotificationChannel(
-                    CHANNEL_ID,
-                    CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_DEFAULT
-                )
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.GREEN
-            notificationManager.createNotificationChannel(notificationChannel)
-        }
+    }
+
+    private fun initNotificationChannel() {
+        val notificationManager = getSystemService(NotificationManager::class.java)
+        val notificationChannel =
+            NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+        notificationChannel.enableLights(true)
+        notificationChannel.lightColor = Color.GREEN
+        notificationManager.createNotificationChannel(notificationChannel)
     }
 
     companion object {

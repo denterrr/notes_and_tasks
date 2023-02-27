@@ -23,31 +23,8 @@ class NoteAdapter constructor(
 
         fun bind(note: Note) {
 
-            val noteTimePair = note.time.toDate()
             binding.root.context.apply {
-                val time: String = when (noteTimePair.first) {
-                    RIGHT_NOW -> {
-                        getString(R.string.right_now)
-                    }
-                    MINUTE_AGO -> {
-                        getString(R.string.one_minute_ago)
-                    }
-                    ANY_MINUTES_AGO -> {
-                        getString(R.string.minutes_ago).format(noteTimePair.second)
-                    }
-                    HOUR_AGO -> {
-                        getString(R.string.one_hour_ago)
-                    }
-                    ANY_HOURS_AGO -> {
-                        getString(R.string.hours_ago).format(noteTimePair.second)
-                    }
-                    YESTERDAY -> {
-                        getString(R.string.yesterday)
-                    }
-                    else -> {
-                        noteTimePair.second
-                    }
-                }
+                val time: String = getTime(note.time.toDate())
                 binding.tvDescription.text =
                     if (note.description.isNotEmpty()) {
                         getString(R.string.note_description)
@@ -58,10 +35,11 @@ class NoteAdapter constructor(
             }
 
             binding.root.setOnClickListener {
-                onClickListener?.invoke(note.id)
                 if (selectIsEnabled) {
                     onCheckListener?.invoke(note.id)
                     draw(note, binding)
+                } else {
+                    onClickListener?.invoke(note.id)
                 }
             }
 
@@ -74,7 +52,40 @@ class NoteAdapter constructor(
 
         }
 
+        private fun getTime(noteTimePair: Pair<Int, String>): String =
+            with(binding.root.context) {
+                when (noteTimePair.first) {
+                    RIGHT_NOW -> {
+                        getString(R.string.right_now)
+                    }
+                    MINUTES -> {
+                        val minutes = noteTimePair.second
+                        if (minutes.last() == '1' && minutes != "11") getString(R.string.one_minute_ago)
+                            .format(minutes)
+                        else if (minutes.last().digitToInt() in 2..4
+                            && minutes.first() != '1'
+                        ) getString(R.string.rus_addition_minutes_ago).format(minutes)
+                        else getString(R.string.minutes_ago).format(minutes)
+                    }
+                    HOURS -> {
+                        val hours = noteTimePair.second
+                        if (hours.last() == '1' && hours != "11") getString(R.string.one_hour_ago)
+                            .format(hours)
+                        else if (hours.last().digitToInt() in 2..4
+                            && hours.first() != '1'
+                        ) getString(R.string.hours_ago).format(hours)
+                        else getString(R.string.rus_addition_hours_ago).format(hours)
+                    }
+                    YESTERDAY -> {
+                        getString(R.string.yesterday)
+                    }
+                    else -> {
+                        noteTimePair.second
+                    }
+                }
+            }
     }
+
 
     private fun draw(note: Note, binding: ItemNoteBinding) {
         binding.root.isChecked = !note.isChecked
@@ -128,12 +139,10 @@ class NoteAdapter constructor(
 
     companion object {
         const val RIGHT_NOW = 0
-        const val MINUTE_AGO = 1
-        const val ANY_MINUTES_AGO = 2
-        const val HOUR_AGO = 3
-        const val ANY_HOURS_AGO = 4
-        const val YESTERDAY = 5
-        const val DAY_OF_WEEK = 6
-        const val JUST_DATE = 7
+        const val MINUTES = 1
+        const val HOURS = 2
+        const val YESTERDAY = 3
+        const val DAY_OF_WEEK = 4
+        const val FULL_DATE = 5
     }
 }

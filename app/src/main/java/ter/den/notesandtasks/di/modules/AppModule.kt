@@ -1,6 +1,6 @@
 package ter.den.notesandtasks.di.modules
 
-import ter.den.notesandtasks.di.annotation.AppScope
+import dagger.Module
 
-@AppScope
+@Module(includes = [DataModule::class])
 interface AppModule

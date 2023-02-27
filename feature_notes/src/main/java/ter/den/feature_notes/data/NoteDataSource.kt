@@ -8,5 +8,6 @@ interface NoteDataSource {
     suspend fun insert(noteDB: NoteDB)
     suspend fun delete(id: Long)
     fun getAllNotes(): Flow<List<NoteDB>>
+    suspend fun getNote(id: Long): NoteDB
 
 }

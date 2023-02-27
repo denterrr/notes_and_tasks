@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="note_description">%s | %s</string>
+    <string name="note_description">%s \u00A0 \u00A0 %s</string>
     <string name="note_description_only_time">%s</string>
     <string name="my_notes">My notes</string>
     <string name="add_your_first_note_right_now">Add your first note right now!</string>
@@ -12,6 +12,8 @@
     <string name="minutes_ago">%s minutes ago</string>
     <string name="one_minute_ago">1 minute ago</string>
     <string name="hours_ago">%s hours ago</string>
+    <string name="rus_addition_minutes_ago">%s minutes ago</string>
+    <string name="rus_addition_hours_ago">%s hours ago</string>
     <string name="one_hour_ago">1 hour ago</string>
     <string name="yesterday">Yesterday</string>
     <string name="untitled">Untitled</string>

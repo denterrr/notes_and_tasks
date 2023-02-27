@@ -14,4 +14,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM ${NoteDB.TABLE_NAME} ORDER BY time DESC")
     fun getAllNotes(): Flow<List<NoteDB>>
+
+    @Query("SELECT * FROM ${NoteDB.TABLE_NAME} WHERE id = :id")
+    suspend fun getNote(id: Long): NoteDB
 }

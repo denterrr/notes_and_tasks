@@ -4,24 +4,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import ter.den.feature_notes.data.NoteDataSource
-import ter.den.feature_notes.data.db.model.toNoteDB
-import ter.den.feature_notes.data.db.model.toNotes
-import ter.den.feature_notes.domain.model.Note
+import ter.den.feature_notes.domain.usecases.DeleteNoteUseCase
+import ter.den.feature_notes.domain.usecases.GetAllNotesUseCase
 import javax.inject.Inject
 
-class NoteViewModel @Inject constructor(
-    private val dataSource: NoteDataSource
+class NotesViewModel @Inject constructor(
+    private val deleteNoteUseCase: DeleteNoteUseCase,
+    getAllNotesUseCase: GetAllNotesUseCase,
 ) : ViewModel() {
     private val selectedIDs = mutableListOf<Long>()
     private val _selectIsEnabled = MutableStateFlow(false)
     val selectIsEnabled: StateFlow<Boolean> = _selectIsEnabled
 
-    fun insert(note: Note) = viewModelScope.launch {
-        dataSource.insert(note.toNoteDB())
-    }
 
     fun onLongClick(id: Long) = viewModelScope.launch {
         if (selectedIDs.contains(id)) {
@@ -30,5 +25,5 @@ class NoteViewModel @Inject constructor(
         _selectIsEnabled.value = selectedIDs.isNotEmpty()
     }
 
-    val notesFlow = dataSource.getAllNotes().map { it.toNotes() }
+    val notesFlow = getAllNotesUseCase()
 }

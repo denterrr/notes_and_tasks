@@ -5,12 +5,18 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import ter.den.core.di.annotation.ViewModelKey
-import ter.den.feature_notes.presentation.NoteViewModel
+import ter.den.feature_notes.presentation.AddNoteViewModel
+import ter.den.feature_notes.presentation.NotesViewModel
 
 @Module
 internal interface PresentationModule {
     @IntoMap
-    @ViewModelKey(NoteViewModel::class)
+    @ViewModelKey(NotesViewModel::class)
     @Binds
-    fun bindNoteViewModel(impl: NoteViewModel): ViewModel
+    fun bindNoteViewModel(impl: NotesViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(AddNoteViewModel::class)
+    @Binds
+    fun bindAddNoteViewModel(impl: AddNoteViewModel): ViewModel
 }

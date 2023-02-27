@@ -17,4 +17,6 @@ class NoteDataSourceImpl @Inject constructor(
     }
 
     override fun getAllNotes(): Flow<List<NoteDB>> = dao.getAllNotes()
+
+    override suspend fun getNote(id: Long): NoteDB = dao.getNote(id)
 }

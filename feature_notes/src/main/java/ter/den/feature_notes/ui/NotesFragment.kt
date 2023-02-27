@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,14 +14,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.collectLatest
-import ter.den.core.domain.extensions.repeatOnStartedLifecycle
+import ter.den.core.domain.extensions.repeatOnCreatedLifecycle
 import ter.den.core.domain.model.CustomThrowable
 import ter.den.core.presentation.ViewModelFactory
 import ter.den.feature_notes.R
 import ter.den.feature_notes.databinding.FragmentNotesBinding
 import ter.den.feature_notes.di.NoteComponentViewModel
 import ter.den.feature_notes.presentation.NoteAdapter
-import ter.den.feature_notes.presentation.NoteViewModel
+import ter.den.feature_notes.presentation.NotesViewModel
 import javax.inject.Inject
 
 
@@ -30,14 +32,20 @@ class NotesFragment : Fragment() {
         get() = _binding ?: throw CustomThrowable.BindingNull
 
     private val notesAdapter by lazy {
-        NoteAdapter(onCheckListener = {
+        NoteAdapter(onClickListener = { id ->
+            findNavController().navigate(
+                R.id.action_notesFragment_to_addNoteFragment, bundleOf(
+                    AddNoteFragment.NOTE_ID_KEY to id
+                )
+            )
+        }, onCheckListener = {
             viewModel.onLongClick(it)
         })
     }
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelFactory
-    private val viewModel: NoteViewModel
+    private val viewModel: NotesViewModel
             by viewModels(factoryProducer = { viewModelFactory })
 
 
@@ -52,8 +60,8 @@ class NotesFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
 
+        Toast.makeText(requireContext(), "AA", Toast.LENGTH_SHORT).show()
         _binding = FragmentNotesBinding.inflate(layoutInflater)
-        binding.tvNotesCount.text = getString(R.string.notes_count).format(32)
         binding.rvNotes.adapter = notesAdapter
         return binding.root
     }
@@ -61,8 +69,11 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initClickListeners()
+        initObservers()
+    }
 
-        repeatOnStartedLifecycle {
+    private fun initObservers() {
+        repeatOnCreatedLifecycle {
             viewModel.notesFlow.collectLatest {
                 notesAdapter.submitList(it)
                 binding.tvNotesCount.text = getString(R.string.notes_count).format(it.size)
@@ -70,13 +81,11 @@ class NotesFragment : Fragment() {
                 binding.rvNotes.isVisible = it.isNotEmpty()
             }
         }
-        repeatOnStartedLifecycle {
+        repeatOnCreatedLifecycle {
             viewModel.selectIsEnabled.collect {
                 if (it) binding.fab.hide() else binding.fab.show()
             }
         }
-
-
     }
 
     private fun initClickListeners() {
