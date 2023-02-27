@@ -10,10 +10,13 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
+import ter.den.core.domain.extensions.toInvisible
+import ter.den.core.domain.extensions.toVisible
+import ter.den.core.domain.interfaces.SelectableOperations
 import ter.den.notesandtasks.R
 import ter.den.notesandtasks.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SelectableOperations {
 
     private var _binding: ActivityMainBinding? = null
     private val binding
@@ -25,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpNavigation()
-
 
 
 //        val workk = OneTimeWorkRequestBuilder<MyService>()
@@ -102,9 +104,30 @@ class MainActivity : AppCompatActivity() {
         notificationManager.createNotificationChannel(notificationChannel)
     }
 
+
+    //SELECTABLE OPERATIONS IMPL
+    override fun hide() {
+        binding.clSelect.toInvisible()
+        binding.bottomNavigation.toVisible()
+    }
+
+    override fun show() {
+        binding.bottomNavigation.toInvisible()
+        binding.clSelect.toVisible()
+    }
+
+    override fun onClickDelete(callBack: () -> Unit) {
+        binding.cvDelete.setOnClickListener { callBack.invoke() }
+    }
+
+    override fun onClickSelectAll(callBack: () -> Unit) {
+        binding.cvSelectAll.setOnClickListener { callBack.invoke() }
+    }
+
     companion object {
         const val CHANNEL_ID = "CHANNEL ID TER"
         const val CHANNEL_NAME = "DEN TER CHANNEL"
     }
+
 
 }

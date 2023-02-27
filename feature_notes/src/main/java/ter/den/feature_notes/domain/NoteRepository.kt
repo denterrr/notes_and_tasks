@@ -5,7 +5,7 @@ import ter.den.feature_notes.domain.model.Note
 
 interface NoteRepository {
     suspend fun insert(id: Long, title: String, desc: String, time: Long)
-    suspend fun delete(id: Long)
+    suspend fun delete(ids: List<Long>)
     fun getAllNotes(): Flow<List<Note>>
     suspend fun getNote(id: Long): Note
 }

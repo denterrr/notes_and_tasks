@@ -23,6 +23,10 @@ class NoteAdapter constructor(
 
         fun bind(note: Note) {
 
+            if (note.isChecked) binding.tvTitle
+                .setPadding(0, 0, 30, 0)
+            else binding.tvTitle.setPadding(0, 0, 0, 0)
+
             binding.root.context.apply {
                 val time: String = getTime(note.time.toDate())
                 binding.tvDescription.text =
@@ -37,7 +41,7 @@ class NoteAdapter constructor(
             binding.root.setOnClickListener {
                 if (selectIsEnabled) {
                     onCheckListener?.invoke(note.id)
-                    draw(note, binding)
+                    check(note, binding)
                 } else {
                     onClickListener?.invoke(note.id)
                 }
@@ -45,7 +49,7 @@ class NoteAdapter constructor(
 
             binding.root.setOnLongClickListener {
                 onCheckListener?.invoke(note.id)
-                draw(note, binding)
+                check(note, binding)
                 true
             }
             binding.root.isChecked = note.isChecked
@@ -87,7 +91,7 @@ class NoteAdapter constructor(
     }
 
 
-    private fun draw(note: Note, binding: ItemNoteBinding) {
+    private fun check(note: Note, binding: ItemNoteBinding) {
         binding.root.isChecked = !note.isChecked
         note.isChecked = !note.isChecked
         selectIsEnabled = list.any { it.isChecked }
@@ -121,6 +125,20 @@ class NoteAdapter constructor(
         }
         diffResult.dispatchUpdatesTo(this)
         notifyDataSetChanged()
+    }
+
+    fun selectAll() {
+        if (list.any { !it.isChecked }) {
+            list.forEachIndexed { index, note ->
+                if (!note.isChecked) note.isChecked = true
+                notifyItemChanged(index)
+            }
+        } else {
+            list.forEachIndexed { index, note ->
+                if (note.isChecked) note.isChecked = false
+                notifyItemChanged(index)
+            }
+        }
     }
 
     class ItemDiff(private val oldList: List<Note>, private val newList: List<Note>) :

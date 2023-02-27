@@ -20,6 +20,8 @@
         <item name="appBackgroundColor">@color/darkPrimary</item>
         <item name="appSecondaryBackgroundColor">@color/darkSecondary</item>
 
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+
 
         <!--        REMOVING UNDERLINE IN TEXT INPUT EDIT TEXT-->
         <item name="android:candidatesTextStyleSpans">candidates</item>

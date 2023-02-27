@@ -16,5 +16,10 @@ interface NoteDao {
     fun getAllNotes(): Flow<List<NoteDB>>
 
     @Query("SELECT * FROM ${NoteDB.TABLE_NAME} WHERE id = :id")
-    suspend fun getNote(id: Long): NoteDB
+    suspend fun getNote(id: Long): NoteDB?
+
+    @Transaction
+    suspend fun deleteAll(ids: List<Long>) {
+        ids.forEach { delete(it) }
+    }
 }

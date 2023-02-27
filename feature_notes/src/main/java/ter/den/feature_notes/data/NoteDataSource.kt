@@ -6,8 +6,8 @@ import ter.den.feature_notes.data.db.model.NoteDB
 interface NoteDataSource {
 
     suspend fun insert(noteDB: NoteDB)
-    suspend fun delete(id: Long)
+    suspend fun delete(ids: List<Long>)
     fun getAllNotes(): Flow<List<NoteDB>>
-    suspend fun getNote(id: Long): NoteDB
+    suspend fun getNote(id: Long): NoteDB?
 
 }

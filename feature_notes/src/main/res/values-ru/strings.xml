@@ -17,4 +17,7 @@
     <string name="one_hour_ago">%s час назад</string>
     <string name="yesterday">Вчера</string>
     <string name="untitled">Без названия</string>
+    <string name="delete_chosen_notes">Удалить выбранные заметки?</string>
+    <string name="delete">Удалить</string>
+    <string name="no">Нет</string>
 </resources>

@@ -17,4 +17,7 @@
     <string name="one_hour_ago">1 hour ago</string>
     <string name="yesterday">Yesterday</string>
     <string name="untitled">Untitled</string>
+    <string name="delete_chosen_notes">Delete chosen notes?</string>
+    <string name="delete">Delete</string>
+    <string name="no">No</string>
 </resources>

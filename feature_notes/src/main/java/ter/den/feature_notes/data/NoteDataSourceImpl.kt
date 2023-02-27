@@ -12,11 +12,11 @@ class NoteDataSourceImpl @Inject constructor(
         dao.insert(noteDB)
     }
 
-    override suspend fun delete(id: Long) {
-        dao.delete(id)
+    override suspend fun delete(ids: List<Long>) {
+        dao.deleteAll(ids)
     }
 
     override fun getAllNotes(): Flow<List<NoteDB>> = dao.getAllNotes()
 
-    override suspend fun getNote(id: Long): NoteDB = dao.getNote(id)
+    override suspend fun getNote(id: Long): NoteDB? = dao.getNote(id)
 }

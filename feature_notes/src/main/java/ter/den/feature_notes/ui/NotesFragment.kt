@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -13,8 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collectLatest
 import ter.den.core.domain.extensions.repeatOnCreatedLifecycle
+import ter.den.core.domain.extensions.toInvisible
+import ter.den.core.domain.extensions.toVisible
+import ter.den.core.domain.interfaces.SelectableOperations
 import ter.den.core.domain.model.CustomThrowable
 import ter.den.core.presentation.ViewModelFactory
 import ter.den.feature_notes.R
@@ -39,7 +42,7 @@ class NotesFragment : Fragment() {
                 )
             )
         }, onCheckListener = {
-            viewModel.onLongClick(it)
+            viewModel.onSelect(it)
         })
     }
 
@@ -60,7 +63,6 @@ class NotesFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
 
-        Toast.makeText(requireContext(), "AA", Toast.LENGTH_SHORT).show()
         _binding = FragmentNotesBinding.inflate(layoutInflater)
         binding.rvNotes.adapter = notesAdapter
         return binding.root
@@ -70,6 +72,28 @@ class NotesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initClickListeners()
         initObservers()
+        setUpSelectableOperations()
+    }
+
+    private fun setUpSelectableOperations() {
+        (requireActivity() as SelectableOperations).onClickDelete {
+            showDeleteDialog()
+        }
+
+        (requireActivity() as SelectableOperations).onClickSelectAll {
+            viewModel.selectAll()
+            notesAdapter.selectAll()
+        }
+    }
+
+    private fun showDeleteDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.delete_chosen_notes))
+            .setNegativeButton(R.string.no) { _, _ -> }
+            .setPositiveButton(R.string.delete) { _, _ ->
+                viewModel.deleteSelected()
+            }
+            .show()
     }
 
     private fun initObservers() {
@@ -82,8 +106,14 @@ class NotesFragment : Fragment() {
             }
         }
         repeatOnCreatedLifecycle {
-            viewModel.selectIsEnabled.collect {
-                if (it) binding.fab.hide() else binding.fab.show()
+            viewModel.selectedListFlow.collectLatest {
+                if (it == 0) {
+                    binding.fab.toVisible()
+                    (requireActivity() as SelectableOperations).hide()
+                } else {
+                    binding.fab.toInvisible()
+                    (requireActivity() as SelectableOperations).show()
+                }
             }
         }
     }
